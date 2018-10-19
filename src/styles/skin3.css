@@ -1,0 +1,88 @@
+header1-red.header{
+    background: url("../images/header1-red.jpg") no-repeat top left;
+    background-size: cover;
+}
+
+.top_menu{
+    background: none;
+}
+
+.second_menus{
+    background: url("../images/header2-red.jpg") no-repeat top left;
+    background-size: cover;
+}
+
+.second_menu{
+    background: none;
+}
+
+/*
+
+.menuBox{
+    background: #e7e6e6;
+}
+
+.left_menu {
+    background: #e7e6e6;
+}
+*/
+
+.top_menu .ivu-menu-item-selected span{
+    color: #fff;
+}
+
+.top_menu .ivu-menu-item-selected i{
+    color: #fff;
+}
+
+.top_menu li span {
+    color: #ffb3b3;
+}
+
+.top_menu li i {
+    color: #ffb3b3;
+}
+
+
+.second_menus .ivu-menu-item-selected span{
+    color: #fff;
+}
+
+.second_menus .ivu-menu-item-selected i{
+    color: #fff;
+}
+
+.second_menus li span {
+    color: #ffb3b3;
+}
+
+.second_menus li i {
+    color: #ffb3b3;
+}
+
+
+/*.left_menu .ivu-menu-item-selected span {
+    color: #fff;
+}
+
+.left_menu .ivu-menu-item-selected i {
+    color: #4eb7cd;
+}
+
+.menuBox{
+    background: #464c5b;
+}
+
+.left_menu {
+    background: #464c5b;
+}*/
+
+.label_s_3 {
+    background: #4eb7cd;
+    border: 1px solid #4eb7cd;
+}
+
+.label_s_4 {
+    background: #f7a955;
+    border: 1px solid #f7a955;
+}

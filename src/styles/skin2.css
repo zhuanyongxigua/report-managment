@@ -1,0 +1,45 @@
+.header{
+    background: #464c5b;
+}
+
+.top_menu{
+    background: none;
+}
+
+.second_menus{
+    background: #4eb7cd;
+}
+
+.second_menu{
+    background: none;
+}
+
+
+.menuBox{
+    background: #464c5b;
+}
+
+.left_menu {
+    background: #464c5b;
+}
+
+
+.label_s_3 {
+    background: #55c45f;
+    border: 1px solid #55c45f;
+}
+
+.label_s_4 {
+    background: #ff6b6b;
+    border: 1px solid #ff6b6b;
+}
+
+
+
+.left_menu .ivu-menu-item-selected span {
+    color: #fff;
+}
+
+.left_menu .ivu-menu-item-selected i {
+    color: #4eb7cd;
+}

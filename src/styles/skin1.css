@@ -1,0 +1,30 @@
+.header{
+    background: url("../images/header1.jpg") no-repeat top left;
+    background-size: cover;
+}
+
+.top_menu{
+    background: none;
+}
+
+.second_menus{
+    background: url("../images/header2.jpg") no-repeat top left;
+    background-size: cover;
+}
+
+.second_menu{
+    background: none;
+}
+
+/*
+
+.menuBox{
+    background: #e7e6e6;
+}
+
+.left_menu {
+    background: #e7e6e6;
+}
+*/
+
+
