@@ -4,7 +4,7 @@ let util = {
 };
 
 if (env === 'development') {
-    util.baseURL = 'http://192.168.1.111/forum/';
+    util.baseURL = 'http://192.168.1.102:3000/';
 } else {
     util.baseURL = '../';
 }
