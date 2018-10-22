@@ -24,6 +24,11 @@ const routers = new VueRouter({
             component: (resolve) => require(['./views/login.vue'], resolve)
         },
         {
+            path: '/projectList',
+            name: 'projectList',
+            component: (resolve) => require(['./views/projectList.vue'], resolve)
+        },
+        {
             path: '/index',
             component: (resolve) => require(['./views/index.vue'], resolve)
         },

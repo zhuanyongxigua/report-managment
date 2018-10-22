@@ -11,7 +11,7 @@ import './styles/skin1.css'
 Vue.use(iView);
 
 if (env === 'development') {
-    axios.defaults.baseURL = 'http://192.168.1.111/forum/';
+    axios.defaults.baseURL = 'http://192.168.1.102:3000/';
     axios.defaults.withCredentials = true;
 } else {
     axios.defaults.baseURL = '../';

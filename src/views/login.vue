@@ -53,13 +53,13 @@
                     password: this.password
                 })
                     .then(this.fnHandleSuccess)
-                    .then(res => setTimeout(() => this.$router.push("index"),100))
+                    .then(res => setTimeout(() => this.$router.push("projectList"),100))
                     .catch(this.fnHandleError)
             },
             loginSubmit2() {
                 this.$Message.success('登录成功');
                 setTimeout(() => {
-                    this.$router.push("index");
+                    this.$router.push("projectList");
                 },100)
             },
             fnHandleSuccess(res) {
