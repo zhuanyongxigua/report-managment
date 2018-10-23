@@ -81,35 +81,6 @@
                             <Icon type="calendar"></Icon>
                             <span>页面性能</span>
                         </Menu-item>
-
-                        <Menu-item name="forumPostsMgt" v-show="oPermission[3]">
-                            <Icon type="calendar"></Icon>
-                            <span>帖子管理</span>
-                        </Menu-item>
-                        <Menu-item name="systemMsg" v-show="oPermission[4]">
-                            <Icon type="bag"></Icon>
-                            <span>系统消息</span>
-                        </Menu-item>
-                        <Menu-item name="withdrawMgt" v-show="oPermission[5]">
-                            <Icon type="share"></Icon>
-                            <span>提现管理</span>
-                        </Menu-item>
-                        <Menu-item name="purScoreRuleSet" v-show="oPermission[6]">
-                            <Icon type="ios-redo"></Icon>
-                            <span>购买积分规则设置</span>
-                        </Menu-item>
-                        <Menu-item name="ScoreSet" v-show="oPermission[7]">
-                            <Icon type="ios-calendar"></Icon>
-                            <span>积分设置</span>
-                        </Menu-item>
-                        <Menu-item name="purScoreRecord" v-show="oPermission[8]">
-                            <Icon type="ios-calendar"></Icon>
-                            <span>用户购买积分记录</span>
-                        </Menu-item>
-                        <Menu-item name="rolePowerMgt" v-show="oPermission[9]">
-                            <Icon type="ios-calendar"></Icon>
-                            <span>角色权限</span>
-                        </Menu-item>
                 </Menu>
             </div>
             <div class="contentBox">
