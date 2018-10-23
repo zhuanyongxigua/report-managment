@@ -16,7 +16,7 @@
 
         <Modal
                 v-model="bAddOperator"
-                title="新增管理员"
+                title="新增项目"
                 :loading="bAddModalLoading"
                 @on-ok="fnAddOpr('oAddOperatorInfo')">
             <Form style="margin-left: -10px; margin-right: 10px; margin-top: 10px;"
@@ -34,27 +34,15 @@
 <script type="text/ecmascript-6">
     import util from '../libs/util';
     export default {
-        name: 'operatorsMgt',
+        name: 'projectList',
         data () {
-            const validateUsername = (rule, value, callback) => {
-                let regExp = /^[A-Za-z][A-Za-z0-9]{3,14}$/;
-                if (!value) {
-                    return callback(new Error('账号不能为空'));
-                }
-                if (!regExp.test(value)) {
-                    return callback(new Error('用户名由4到15个英文字母和数字组成，且以字母开头'))
-                }
-                callback();
-            };
             return {
                 aRoles: [],
                 //搜索框
                 sQueryStr: '',
-
                 //分页
                 iCurrentPage: 1,
                 iTotalPages: 0,
-
                 //表格
                 aTableColumns: [
                     {
@@ -92,27 +80,17 @@
                     }
                 ],
                 aTableData: [],
-
                 //新增弹出框
                 bAddOperator: false,
                 bAddModalLoading: true,
                 oAddOperatorInfo: {
-                    loginId: '',
-                    username: '',
-                    groupId: ''
+                    projectName: ''
                 },
                 oAddOperatorInfoRules: {
-                    loginId: [
-                        {validator: validateUsername, required: true, trigger: 'blur'},
-                    ],
-                    username: [
+                    projectName: [
                         {required: true, message: '管理员名称不能为空', trigger: 'blur'}
-                    ],
-                    groupId: [
-                        {required: true, message: '管理员角色不能为空', trigger: 'change'}
                     ]
                 },
-
                 //详情弹出框
                 bOprDetails: false,
                 oOprInfo: {},
@@ -139,8 +117,8 @@
                     .catch(console.log);
             },
             fnAddOpr(name) {
-                util.fnValidateInfo.call(this, name)
-                    .then(res => axios.put('operator/addManager', this.oAddOperatorInfo))
+                util.fnValidateInfo.call(this, 'bAddModalLoading').call(this, name)
+                    .then(res => axios.post('api/addProject', this.oAddOperatorInfo))
                     .then(util.fnHandleSuccess.bind(this))
                     .then(res => setTimeout(() => this.bAddOperator = false, 1000))
                     .then(this.fnGetOprList)
@@ -151,12 +129,7 @@
                 this.$refs[name].resetFields();
             },
             fnShowOprDetailsModal(params) {
-                this.bOprDetails = true;
-                this.$refs['oOprInfo'].resetFields();
-                this.oOprInfo = JSON.parse(JSON.stringify(this.aTableData[params.index]));
-                this.oOprInfo.status = this.oOprInfo.status ? '1' : '0';
-                this.oOprInfo.groupId = this.oOprInfo.groupId.toString();
-                this.oOprInfo.password = '';
+                this.$router.push({ path: 'index', query: { id: params.row.id }})
             },
             //分页
             fnPagination(page){

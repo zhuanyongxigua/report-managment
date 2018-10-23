@@ -74,12 +74,12 @@
                 <Menu active-name="operatorsMgt" width="auto" class="left_menu" @on-select="fnCurView">
                         <Menu-item name="operatorsMgt" v-show="oPermission[1]">
                             <Icon type="clipboard"></Icon>
-                            <span>操作员管理</span>
+                            <span>JS错误</span>
                         </Menu-item>
 
                         <Menu-item name="consumersMgt" v-show="oPermission[2]">
                             <Icon type="calendar"></Icon>
-                            <span>平台人员管理</span>
+                            <span>页面性能</span>
                         </Menu-item>
 
                         <Menu-item name="forumPostsMgt" v-show="oPermission[3]">
