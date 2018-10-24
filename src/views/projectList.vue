@@ -129,7 +129,7 @@
                 this.$refs[name].resetFields();
             },
             fnShowOprDetailsModal(params) {
-                this.$router.push({ path: 'index', query: { id: params.row.id }})
+                this.$router.push({ path: 'index', query: { projectId: params.row.projectId }})
             },
             //分页
             fnPagination(page){

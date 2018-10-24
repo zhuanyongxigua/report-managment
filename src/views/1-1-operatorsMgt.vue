@@ -24,7 +24,6 @@
                     <Form style="margin-left: -10px; margin-right: 10px; margin-top: 10px;"
                           ref="oOprInfo"
                           :model="oOprInfo"
-                          :rules="oModifyOperatorInfoRules"
                           :label-width="100">
                         <Form-item label="账号" prop="loginId">
                             <Input v-model="oOprInfo.loginId" placeholder="请输入账号"></Input>
@@ -68,29 +67,35 @@
                     },
                     {
                         title: '时间',
-                        key: 'loginId',
+                        key: 'createdAt',
                         align: 'center'
                     },
                     {
                         title: '日志类型',
-                        key: 'username',
-                        align: 'center'
+                        key: 'msg',
+                        align: 'center',
+                        render (h, p) {
+                            return h('span', p.row.msg[1]);
+                        }
                     },
                     {
                         title: '页面地址',
-                        key: 'status',
+                        key: 'from',
                         align: 'center',
+                        render (h, p) {
+                            return h('span', p.row.from[1]);
+                        }
                     },
-                    {
-                        title: '浏览器',
-                        key: 'status',
-                        align: 'center',
-                    },
-                    {
-                        title: '错误堆栈',
-                        key: 'status',
-                        align: 'center',
-                    },
+                    // {
+                    //     title: '浏览器',
+                    //     key: 'status',
+                    //     align: 'center',
+                    // },
+                    // {
+                    //     title: '错误堆栈',
+                    //     key: 'status',
+                    //     align: 'center',
+                    // },
                     // {
                     //     title: '详情',
                     //     key: 'action',
@@ -116,23 +121,6 @@
                 iOprIndex: 0,
                 oOprInfo: {},
                 bModifyModalLoading: true,
-                oModifyOperatorInfoRules: {
-                    loginId: [
-                        {validator: validateUsername, required: true, trigger: 'blur'}
-                    ],
-                    realname: [
-                        {required: true, message: '管理员名称不能为空', trigger: 'blur'}
-                    ],
-                    status: [
-                        {required: true, message: '启用状态不能为空', trigger: 'change'}
-                    ],
-                    username: [
-                        {required: true, message: '昵称不能为空', trigger: 'blur'}
-                    ],
-                    groupId: [
-                        {required: true, message: '管理员角色不能为空', trigger: 'change'}
-                    ]
-                },
             }
         },
 
@@ -146,11 +134,16 @@
                     pageSize: 10,
                     currentPage: this.iCurrentPage,
                     param: {
-                        errorVo: {id: this.$router.query.id || ''}
+                        errorVo: {projectId: this.$route.query.projectId || ''}
                     }
                 })
                     .then(res => {
                         this.aTableData = [...res.data.rows];
+                        this.aTableData.forEach(ele => {
+                            let oDate = new Date(ele.createdAt);
+                            ele.createdAt = oDate.getFullYear() + "-" + (oDate.getMonth() + 1) + "-" + oDate.getDate() + " " + oDate.getHours() + ":" + oDate.getMinutes() + ":" + oDate.getSeconds();
+                            return ele;
+                        })
                         this.iTotalPages = res.data.total;
                     })
                     .catch(console.log);
