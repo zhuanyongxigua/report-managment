@@ -6,16 +6,6 @@
         <div class="table_top">
             <Input class="table_top_item" v-model="sQueryStr" icon="ios-search-strong" placeholder="用户名"
                    style="width: 200px" @on-blur="fnGetUserList"/>
-            <Select style="width: 200px" v-model="iIdentityType" placeholder="请选择身份类型" @on-change="fnGetUserList">
-                <Option v-for="item in aUserType" :value="item.id.toString()" v-text="item.name"></Option>
-            </Select>
-            <Select style="width: 200px" v-model="sSortStr" placeholder="请选择身份类型" @on-change="fnGetUserList">
-                <Option value="reg_date desc">关注时间</Option>
-                <Option value="receives desc">被打赏积分数</Option>
-                <Option value="rewards desc">打赏积分数</Option>
-            </Select>
-            <Date-picker class="table_top_item" type="daterange" :options="options2" placement="bottom-end"
-                                placeholder="选择注册日期" style="width: 200px" @on-change="fnGetListByTime"></Date-picker>
         </div>
 
         <div class="center_box">
@@ -108,48 +98,6 @@
                 iCurrentPage: 1,
                 iTotalPages: 0,
 
-                //时间范围
-                options2: {
-                    shortcuts: [
-                        {
-                            text: '近7天',
-                            value () {
-                                const end = new Date();
-                                const start = new Date();
-                                start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-                                return [start, end];
-                            }
-                        },
-                        {
-                            text: '近2周',
-                            value () {
-                                const end = new Date();
-                                const start = new Date();
-                                start.setTime(start.getTime() - 3600 * 1000 * 24 * 14);
-                                return [start, end];
-                            }
-                        },
-                        {
-                            text: '近1月',
-                            value () {
-                                const end = new Date();
-                                const start = new Date();
-                                start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-                                return [start, end];
-                            }
-                        },
-                        {
-                            text: '近3月',
-                            value () {
-                                const end = new Date();
-                                const start = new Date();
-                                start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-                                return [start, end];
-                            }
-                        }
-                    ]
-                },
-
                 //表格
                 columns1: [
                     {
@@ -158,63 +106,37 @@
                         align: 'center'
                     },
                     {
-                        title: '昵称',
-                        key: 'username',
+                        title: '页面加载时间',
+                        key: 'loadPage',
+                        align: 'center'
+                    },
+                    // {
+                    //     title: '性别',
+                    //     key: 'sex',
+                    //     align: 'center',
+                    //     render (h, p) {
+                    //         return h('span', p.row.sex === 'm' ? '男' : '女');
+                    //     }
+                    // },
+                    {
+                        title: '解析DOM时间',
+                        key: 'domReady',
                         align: 'center'
                     },
                     {
-                        title: '性别',
-                        key: 'sex',
-                        align: 'center',
-                        render (h, p) {
-                            return h('span', p.row.sex === 'm' ? '男' : '女');
-                        }
-                    },
-                    {
-                        title: '关注时间',
-                        key: 'regDate',
-                        align: 'center'
-                    },
-                    {
-                        title: '身份类型',
-                        key: 'type',
+                        title: '获取资源时间',
+                        key: 'networkTime',
                         align: 'center',
                     },
                     {
-                        title: '被打赏积分数',
-                        key: 'receives',
+                        title: '资源加载完成时间',
+                        key: 'contentLoad',
                         align: 'center',
                     },
                     {
-                        title: '打赏积分数',
-                        key: 'rewards',
+                        title: 'onload回调时间',
+                        key: 'onloadcb',
                         align: 'center',
-                    },
-                    {
-                        title: '启用停用',
-                        key: 'status',
-                        align: 'center',
-                        render (h, p) {
-                            return h('span', p.row.status ? '启用' : '停用');
-                        }
-                    },
-                    {
-                        title: '永久封停',
-                        key: '',
-                        align: 'center',
-                        render: (h, p) => {
-                            return h('Button', {
-                                props: {
-                                    type: 'error',
-                                    size: 'small',
-                                    disabled: p.row.closure ? false : true,
-                                    attrs: {
-                                        class: 'in_table_btn'
-                                    }
-                                },
-                                on: {click: () => this.fnShowBlockModal(p)}
-                            }, '永久封停')
-                        }
                     },
                     {
                         title: '详情',
@@ -242,33 +164,16 @@
         },
 
         created: function () {
-            this.fnGetType();
             this.fnGetUserList();
         },
         methods: {
-            fnGetType() {
-                return axios.post('dictionary/searchThreshold', {
-                    type: 'UserType'
-                })
-                    .then(res => {
-                        this.aUserType = [...res.data];
-                        this.aUserType.push({id: '', name: '全部'});
-                    })
-                    .catch(console.log);
-            },
             //获取用户列表
             fnGetUserList() {
-                return axios.post('user/searchUsersByParm', {
+                return axios.post('api/getPerformance', {
                     pageSize: 10,
                     currentPage: this.iCurrentPage,
                     param: {
-                        userVo: {
-                            queryStr: this.sQueryStr || '',
-                            queryDateQ: this.startDate || null,
-                            queryDateZ: this.endDate || null,
-                            typeCode: this.iIdentityType === '' || this.iIdentityType === null ? null : Number(this.iIdentityType),
-                            sortStr: this.sSortStr
-                        }
+                        performanceVo: {projectId: this.$route.query.projectId || ''}
                     }
                 })
                     .then(res => {

@@ -91,11 +91,14 @@
                     //     key: 'status',
                     //     align: 'center',
                     // },
-                    // {
-                    //     title: '错误堆栈',
-                    //     key: 'status',
-                    //     align: 'center',
-                    // },
+                    {
+                        title: '错误堆栈',
+                        key: 'msg',
+                        align: 'center',
+                        render (h, p) {
+                            return h('span', p.row.msg[0]);
+                        }
+                    },
                     // {
                     //     title: '详情',
                     //     key: 'action',
